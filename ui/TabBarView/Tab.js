@@ -1,11 +1,12 @@
 import React from 'react'
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity} from 'react-native'
+import {blue, black} from '../colors'
 
 export default class Tab extends React.Component {
   render () {
     const textStyle = StyleSheet.flatten([
       styles.text,
-      {color: this.props.selected ? 'rgb(100, 175, 200)' : 'rgb(0, 0, 0)'}
+      {color: this.props.selected ? blue() : black()}
     ])
 
     return (

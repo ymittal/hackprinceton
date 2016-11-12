@@ -1,5 +1,4 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
 import TabBarView from './TabBarView'
 import Groups from './Groups'
 import Profile from './Profile'
