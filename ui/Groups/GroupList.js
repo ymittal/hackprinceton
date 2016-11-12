@@ -22,22 +22,22 @@ export default class GroupList extends React.Component {
         {
           name: 'Group 1',
           timeLeft: 5,
-          mission: 'clean water'
+          mission: 'Clean Water'
         },
         {
           name: 'Suh Dudes',
           timeLeft: 10,
-          mission: 'poverty'
+          mission: 'Poverty'
         },
         {
           name: 'Hey Man',
           timeLeft: 4,
-          mission: 'healthcare'
+          mission: 'Healthcare'
         },
         {
           name: 'Dats Cool',
           timeLeft: 183,
-          mission: 'breast cancer'
+          mission: 'Breast Cancer'
         }
       ]
     })

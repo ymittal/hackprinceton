@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    padding: 20
   },
   progress: {
     paddingTop: 40,

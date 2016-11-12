@@ -5,7 +5,12 @@ export default class Group extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>{this.props.name}</Text>
+        <Text style={styles.name}>
+          {this.props.name}
+        </Text>
+        <Text style={styles.mission}>
+          {this.props.mission}
+        </Text>
       </View>
     )
   }
@@ -18,6 +23,15 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: 'black',
     justifyContent: 'center',
-    alignItems: 'center'
+    paddingLeft: 12,
+    marginBottom: 4,
+    borderRadius: 2
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  mission: {
+    marginLeft: 4
   }
 })
