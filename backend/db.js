@@ -1,65 +1,85 @@
+//connecting mongoose
+
 var mongoose = require('mongoose');
 
-var MongoClient = mongodb.MongoClient;
+mongoose.connect('mongodb://piyushib:mongodb@ec2-54-196-207-87.compute-1.amazonaws.com:27017/admin');
 
-var url = 'mongodb://piyushib:mongodb@ec2-54-196-207-87.compute-1.amazonaws.com:27017/admin';
+//get notified if we connected successfully
 
-var User = mongoose.Schema({
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+});
+
+//reference to user schema
+var userSchema = mongoose.Schema({
 	username: {
 		type: String,
 		required: true
 	},
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
 	groups: [{
 		type: mongoose.Schema.types.ObjectId,
 		ref: 'Group'
 	}]
 })
 
-var Group = mongoose.Schema({
-	name: String,
-	mission: String,
-	users: [{type: mongoose.Schema.types.ObjectId}]
-})
+//compiled schema into a model
+var User = mongoose.model('User', userSchema);
 
-// Use connect method to connect to the Server
-MongoClient.connect(url, function (err, db) {
-  if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-    //HURRAY!! We are connected. :)
-    console.log('Connection established to', url);
+// group schema
+var groupSchema = new mongoose.Schema({
+  users: [{type: Schema.Types.ObjectId, ref: 'userSchema'}],
+  timeLeft: Number,
+  goal: {
+    type: Number,
+    required: true
+  }
+  theme: {
+    type: String,
+    required: true
+  }
+  mission: String
+});
 
-    var collection = db.collection('payments');
+var Group = mongoose.model('Group', groupSchema);
 
-    collection.find()
+// donation schema
+var donationSchema = new mongoose.Schema({
+  amount: {
+    type: Number,
+    required: true
+  }
+  groupAssociated: [{
+    type: Schema.Types.ObjectId, ref: 'group'
+  }],
+  userAssociated:[{
+    type: Schema.Types.ObjectId, ref: 'user'
+  }]
+});
 
-    // do some work here with the database.
-    //Close connection
-    db.close();
+var Donation = mongoose.model('Donation', donationSchema);
+
+//payments schema
+var paymentSchema = new mongoose.Schema({
+  amount: {
+    type: Number,
+    required: true
+  },
+  userAssociated: {
+    type: Schema.Types.ObjectId, ref: 'User'
+  },
+  groupAssociated: {
+    type: Schema.Types.ObjectId, ref: 'Group'
   }
 });
 
-/*	Server = mongo.Server,
-  	Db = mongo.Db;
-
-var serverInstance = new mongo.Server('localhost', 27017, {auto_reconnect: true});
-
-var dbref = new mongo.Db('paymentsDB', serverInstance);
-
-dbref.open(function(err,dbref){
-
-});
-
-dbref.collection('payment', function(err, collectionref) { 
-    // this is an asynchroneous operation
-});
-
-var myDocs = [{"foo":"bar"}, {"foo":"bar2"}, {"foo":"bar3"}];
-collectionref.insert(myDocs, function (err, result) {
-    // this is an asynchroneous operation
-});
-
-var cursor = collectionref.find();
-cursor.toArray(function(err,docs){
-
-});*/
+var Payment = mongoose.model('Payment', paymentSchema);
