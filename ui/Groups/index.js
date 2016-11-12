@@ -18,7 +18,7 @@ export default class Groups extends React.Component {
         <View style={styles.progress}>
           <ProgressBar {...progressProps} />
         </View>
-        <GroupList user={'user'} />
+        <GroupList user={'user'} showGroup={this.props.showGroup} />
       </View>
     )
   }

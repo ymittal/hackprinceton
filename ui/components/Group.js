@@ -1,20 +1,22 @@
 import React from 'react'
-import {StyleSheet, View, Text} from 'react-native'
+import {StyleSheet, TouchableHighlight, View, Text} from 'react-native'
 
 export default class Group extends React.Component {
   render () {
     return (
-      <View style={styles.container}>
-        <Text style={styles.time}>
-          {this.props.timeLeft}
-        </Text>
-        <Text style={styles.name}>
-          {this.props.name}
-        </Text>
-        <Text style={styles.mission}>
-          {this.props.mission}
-        </Text>
-      </View>
+      <TouchableHighlight style={styles.container} onPress={this.props.showGroup}>
+        <View>
+          <Text style={styles.time}>
+            {this.props.timeLeft}
+          </Text>
+          <Text style={styles.name}>
+            {this.props.name}
+          </Text>
+          <Text style={styles.mission}>
+            {this.props.mission}
+          </Text>
+        </View>
+      </TouchableHighlight>
     )
   }
 }

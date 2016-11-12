@@ -22,22 +22,26 @@ export default class GroupList extends React.Component {
         {
           name: 'Group 1',
           timeLeft: 5,
-          mission: 'Clean Water'
+          mission: 'Clean Water',
+          goal: 10
         },
         {
           name: 'Suh Dudes',
           timeLeft: 10,
-          mission: 'Poverty'
+          mission: 'Poverty',
+          goal: 20
         },
         {
           name: 'Hey Man',
           timeLeft: 4,
-          mission: 'Healthcare'
+          mission: 'Healthcare',
+          goal: 10
         },
         {
           name: 'Dats Cool',
           timeLeft: 183,
-          mission: 'Breast Cancer'
+          mission: 'Breast Cancer',
+          goal: 300
         }
       ]
     })
@@ -45,11 +49,13 @@ export default class GroupList extends React.Component {
 
   render () {
     const groups = this.state.groups.map((group, i) => {
-      const {name, timeLeft, mission} = group
+      const {name, timeLeft, mission, goal} = group
       const groupProps = {
+        showGroup: this.props.showGroup.bind(null, group),
         name,
         timeLeft,
         mission,
+        goal,
         key: i
       }
 

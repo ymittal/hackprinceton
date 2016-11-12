@@ -1,11 +1,24 @@
 import React from 'react'
-import {StyleSheet, View, Text, ScrollView} from 'react-native'
+import {StyleSheet, View, Text} from 'react-native'
 import {Pie} from 'react-native-pathjs-charts'
+import superagent from 'superagent'
 
-export default class Profile extends React.Component {
-  render () {
-    const chartProps = {
-      accessorKey: 'amount',
+export default class GroupProfile extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {data: []}
+  }
+
+  componentWillMount () {
+    // superagent.get(`/groups?name=${this.props.name}`, (err, res) => {
+    //   if (err) {
+
+    //   } else {
+    //     this.setState({users: res.body})
+    //   }
+    // })
+
+    this.setState({
       data: [
         {
           name: 'Alice',
@@ -23,7 +36,14 @@ export default class Profile extends React.Component {
           name: 'David',
           amount: 5.34
         }
-      ],
+      ]
+    })
+  }
+
+  render () {
+    const chartProps = {
+      accessorKey: 'amount',
+      data: this.state.data,
       options: {
         width: 400,
         height: 400,
@@ -40,11 +60,16 @@ export default class Profile extends React.Component {
       }
     }
 
+    const current = this.state.data.reduce((prev, cur) => {
+      return prev + cur.amount
+    }, 0)
+
     return (
-      <ScrollView style={{flex: 1, backgroundColor: '#FFFCFF'}}
-        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.container}>
+        <Text>{this.props.name}</Text>
         <Pie {...chartProps} />
-      </ScrollView>
+        <Text>${current.toFixed(2)}/${this.props.goal}</Text>
+      </View>
     )
   }
 }
@@ -52,10 +77,10 @@ export default class Profile extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'rgb(255, 255, 255)',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(255, 0, 0)'
+    alignItems: 'center'
   },
   chart: {
     backgroundColor: 'rgb(255, 0, 0)',
