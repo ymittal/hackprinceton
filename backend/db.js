@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var MongoClient = mongodb.MongoClient;
 
-var url = 'mongodb://localhost:27017/paymentsVenmo';
+var url = 'mongodb://piyushib:mongodb@ec2-54-196-207-87.compute-1.amazonaws.com:27017/admin';
 
 var User = mongoose.Schema({
 	username: {
