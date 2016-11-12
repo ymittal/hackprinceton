@@ -4,6 +4,8 @@ import {Bar as ProgressBar} from 'react-native-progress'
 import GroupList from '../components/GroupList'
 import {blue} from '../colors'
 
+const baseUrl = 'http://10.24.3.160:8080'
+
 export default class Groups extends React.Component {
   render () {
     const progressProps = {
@@ -18,7 +20,7 @@ export default class Groups extends React.Component {
         <View style={styles.progress}>
           <ProgressBar {...progressProps} />
         </View>
-        <GroupList showGroup={this.props.showGroup} url={`/groups?username=${this.props.username}`} />
+        <GroupList showGroup={this.props.showGroup} url={`${baseUrl}/users?username=${this.props.username}`} />
       </View>
     )
   }

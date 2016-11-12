@@ -1,7 +1,9 @@
 // connecting mongoose
 
 import mongoose, {Schema} from 'mongoose'
+import Promise from 'bluebird'
 
+mongoose.Promise = Promise
 mongoose.connect('mongodb://piyushib:mongodb@ec2-54-196-207-87.compute-1.amazonaws.com:27017/admin')
 
 // get notified if we connected successfully

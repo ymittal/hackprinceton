@@ -4,21 +4,33 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 
+const port = process.env.PORT || 8080
+
 var app = express()
 app.use(bodyParser.urlencoded({extended: false}))
+app.use((req, res, next) => {
+  console.log(req.method, req.path)
+  next()
+})
 
 const User = mongoose.model('User')
 const Group = mongoose.model('Group')
 const Donation = mongoose.model('Donation')
 
-app.get('/users', (req, res, next) => {
-  User.findOne({username: req.query.username}).populate('group', function (err, data, count) {
-    if (err) next(err)
-    else res.send(data)
-  })
-})
+// app.get('/groups', (req, res) => {})
 
-app.get('/groups', (req, res) => {})
+app.get('/users', async (req, res, next) => {
+  const query = {
+    username: req.query.username || undefined
+  }
+
+  console.log('get users', query)
+  try {
+    res.send(await User.find(query))
+  } catch (e) {
+    next(e)
+  }
+})
 
 app.post('/donations', (req, res) => {
   var donation = new Donation({
@@ -38,6 +50,6 @@ app.use((err, req, res, next) => {
   console.log('error', err)
 })
 
-app.listen(8080, 'localhost', () => {
-  console.log('App listening on http://localhost:8080')
+app.listen(port, () => {
+  console.log('App listening on port', port)
 })
