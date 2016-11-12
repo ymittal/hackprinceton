@@ -53,7 +53,7 @@ export default class GroupProfile extends React.Component {
         R: 125,
         label: {
           fontFamily: 'Arial',
-          fontSize: 13,
+          fontSize: 10,
           fontWeight: true,
           color: '#ECF0F1'
         }
@@ -64,11 +64,16 @@ export default class GroupProfile extends React.Component {
       return prev + cur.amount
     }, 0)
 
+    const users = this.state.data.map((user, i) => {
+      return <Text key={i}>{user.name}</Text>
+    })
+
     return (
       <View style={styles.container}>
-        <Text>{this.props.name}</Text>
+        <Text style={styles.mission}>{this.props.mission}</Text>
         <Pie {...chartProps} />
-        <Text>${current.toFixed(2)}/${this.props.goal}</Text>
+        <Text style={styles.progress}>${current.toFixed(2)}/${this.props.goal}</Text>
+        <View style={styles.userlist}>{users}</View>
       </View>
     )
   }
@@ -82,10 +87,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  chart: {
-    backgroundColor: 'rgb(255, 0, 0)',
-    height: 200,
-    width: 200
+  mission: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: -44
+  },
+  progress: {
+    fontSize: 22,
+    marginTop: -44,
+    marginBottom: 22
+  },
+  userlist: {
+
   }
 })
 

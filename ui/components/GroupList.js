@@ -1,6 +1,6 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
-import Group from '../components/Group'
+import Group from './Group'
 import superagent from 'superagent'
 
 export default class GroupList extends React.Component {

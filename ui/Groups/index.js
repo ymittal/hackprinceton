@@ -1,7 +1,7 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 import {Bar as ProgressBar} from 'react-native-progress'
-import GroupList from './GroupList'
+import GroupList from '../components/GroupList'
 import {blue} from '../colors'
 
 export default class Groups extends React.Component {
@@ -18,7 +18,7 @@ export default class Groups extends React.Component {
         <View style={styles.progress}>
           <ProgressBar {...progressProps} />
         </View>
-        <GroupList user={'user'} showGroup={this.props.showGroup} />
+        <GroupList showGroup={this.props.showGroup} url={`/groups?username=${this.props.username}`} />
       </View>
     )
   }
