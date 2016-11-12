@@ -1,0 +1,26 @@
+{
+  "name": "hackprinceton",
+  "version": "1.0.0",
+  "description": "Charity app using rounding-up change from venmo payments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ymittal/hackprinceton.git"
+  },
+  "keywords": [
+    "venmo"
+  ],
+  "author": "piyushib",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ymittal/hackprinceton/issues"
+  },
+  "homepage": "https://github.com/ymittal/hackprinceton#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.7"
+  }
+}
