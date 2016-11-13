@@ -12,7 +12,7 @@ export default class Group extends React.Component {
         <View style={styles.container}>
           <View style={styles.info}>
             <Text style={styles.time}>
-              {timeLeft}
+              {timeLeft} days remaining
             </Text>
             <Text style={styles.theme}>
               {theme}
