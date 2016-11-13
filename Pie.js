@@ -48,7 +48,7 @@ export default class PieChart extends Component {
   color(i) {
     let color = this.props.options.color
     if (color && !_.isString(color)) color = color.color
-    let pallete = this.props.pallete || Colors.mix(color || '#9ac7f7')
+    let pallete = this.props.pallete || Colors.mix(color || '#f7ca9a')
     return Colors.string(cyclic(pallete, i)) }
 
 
