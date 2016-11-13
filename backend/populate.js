@@ -78,19 +78,34 @@ async function main () {
 
   // build out eight users
 
-  for (var i = 0, len = firsts.length; i < len; i++) {
+  for (var i = 0, len = firsts.length/2; i < len; i++) {
     var named = 'user' + i
     var temp = new User({
       username: named,
       firstName: firsts[i],
       lastName: lasts[i],
-      groups: groups
+      groups: [red, blue, obama]
     })
 
     const data = await temp.save()
     console.log('Saved user ', data, 'count: ', i)
     users.push(temp)
   }
+
+  for (var i = 4, len = firsts.length; i < len; i++) {
+    var named = 'user' + i
+    var temp = new User({
+      username: named,
+      firstName: firsts[i],
+      lastName: lasts[i]
+      groups: [white, nyc, red]
+    })
+    
+    const data = await temp.save()
+    console.log('Saved user ', data, 'count: ', i)
+    users.push(temp)
+  }
+
 
   var amounts = [0.01, 0.99, 0.12, 0.32, 0.45, 0.54, 0.64, 0.31, 0.85, 0.73, 0.93, 0.22, 0.16, 0.67, 0.81, 0.07, 0.38]
 
