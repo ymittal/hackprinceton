@@ -13,7 +13,7 @@ http.listen(3000, function(){
 });
 
 io.on('connection',function(socket){
-	console.log('We have user connected !');
+	console.log('We have user connected !')
 // This event will trigger when any user is connected.
 // You can use 'socket' to emit and receive events.
 	socket.on('payment added',function(data){
