@@ -1,10 +1,12 @@
 import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
+import GroupList from './components/GroupList'
+import {baseUrl} from '../constants'
 
 export default class Suggested extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {groups: []}
   }
 
   componentWillMount () {
@@ -38,7 +40,8 @@ export default class Suggested extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>Suggested</Text>
+        <Text style={styles.title}>Suggested Groups</Text>
+        <GroupList showGroup={this.props.showGroup} url={`${baseUrl}/groups`} />
       </View>
     )
   }
@@ -46,9 +49,17 @@ export default class Suggested extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'stretch',
+    padding: 20
+  },
+  title: {
+    alignSelf: 'center',
+    fontSize: 20,
+    marginBottom: 20,
+    fontWeight: 'bold'
   }
 })
 

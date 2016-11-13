@@ -1,7 +1,9 @@
 import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 import {Pie} from 'react-native-pathjs-charts'
-import superagent from 'superagent'
+import LinearGradient from 'react-native-linear-gradient'
+import {orange, gradientBottom, gradientTop} from '../colors'
+import {baseUrl} from '../../constants'
 
 export default class GroupProfile extends React.Component {
   constructor (props) {
@@ -10,34 +12,34 @@ export default class GroupProfile extends React.Component {
   }
 
   componentWillMount () {
-    // superagent.get(`/groups?name=${this.props.name}`, (err, res) => {
-    //   if (err) {
+    fetch(`${baseUrl}/groups?theme=${this.props.theme}`).then((res) => res.json())
+      .then((res) => {
+        this.setState({data: res})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
-    //   } else {
-    //     this.setState({users: res.body})
-    //   }
+    // this.setState({
+    //   data: [
+    //     {
+    //       name: 'Alice',
+    //       amount: 14.40
+    //     },
+    //     {
+    //       name: 'Bob',
+    //       amount: 5.00
+    //     },
+    //     {
+    //       name: 'Charlie',
+    //       amount: 8.00
+    //     },
+    //     {
+    //       name: 'David',
+    //       amount: 5.34
+    //     }
+    //   ]
     // })
-
-    this.setState({
-      data: [
-        {
-          name: 'Alice',
-          amount: 14.40
-        },
-        {
-          name: 'Bob',
-          amount: 5.00
-        },
-        {
-          name: 'Charlie',
-          amount: 8.00
-        },
-        {
-          name: 'David',
-          amount: 5.34
-        }
-      ]
-    })
   }
 
   render () {
@@ -48,12 +50,12 @@ export default class GroupProfile extends React.Component {
         width: 400,
         height: 400,
         center: [200, 200],
-        color: '#2980B9',
+        color: '#F09133',
         r: 1,
         R: 125,
         label: {
           fontFamily: 'Arial',
-          fontSize: 13,
+          fontSize: 10,
           fontWeight: true,
           color: '#ECF0F1'
         }
@@ -64,12 +66,17 @@ export default class GroupProfile extends React.Component {
       return prev + cur.amount
     }, 0)
 
+    const users = this.state.data.map((user, i) => {
+      return <Text key={i} style={styles.text}>{user.name}</Text>
+    })
+
     return (
-      <View style={styles.container}>
-        <Text>{this.props.name}</Text>
+      <LinearGradient colors={[gradientTop(), gradientBottom()]} style={styles.container}>
+        <Text style={styles.mission}>{this.props.mission}</Text>
         <Pie {...chartProps} />
-        <Text>${current.toFixed(2)}/${this.props.goal}</Text>
-      </View>
+        <Text style={styles.progress}>${current.toFixed(2)}/${this.props.goal}</Text>
+        <View style={styles.userlist}>{users}</View>
+      </LinearGradient>
     )
   }
 }
@@ -82,10 +89,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  chart: {
-    backgroundColor: 'rgb(255, 0, 0)',
-    height: 200,
-    width: 200
+  mission: {
+    backgroundColor: 'transparent',
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: -44
+  },
+  progress: {
+    fontSize: 22,
+    marginTop: -44,
+    marginBottom: 22,
+    backgroundColor: 'transparent',
+    color: 'white'
+  },
+  userlist: {
+
+  },
+  text: {
+    backgroundColor: 'transparent',
+    color: 'white'
   }
 })
 

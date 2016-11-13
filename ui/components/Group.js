@@ -9,8 +9,8 @@ export default class Group extends React.Component {
           <Text style={styles.time}>
             {this.props.timeLeft}
           </Text>
-          <Text style={styles.name}>
-            {this.props.name}
+          <Text style={styles.theme}>
+            {this.props.theme}
           </Text>
           <Text style={styles.mission}>
             {this.props.mission}
@@ -24,19 +24,20 @@ export default class Group extends React.Component {
 const styles = StyleSheet.create({
   container: {
     height: 72,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'black',
+    // borderWidth: 1,
+    // borderStyle: 'solid',
+    // borderColor: 'black',
     justifyContent: 'center',
     marginBottom: 4,
     padding: 4,
-    borderRadius: 2
+    borderRadius: 2,
+    backgroundColor: 'white'
   },
   time: {
     marginTop: -12,
     fontSize: 8
   },
-  name: {
+  theme: {
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 12

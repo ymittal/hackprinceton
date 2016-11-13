@@ -1,50 +1,61 @@
 import React from 'react'
-import {StyleSheet, View, Text, ScrollView} from 'react-native'
-import {Pie} from 'react-native-pathjs-charts'
+import {StyleSheet, View, Text} from 'react-native'
 
 export default class Profile extends React.Component {
-  render () {
-    const chartProps = {
-      accessorKey: 'amount',
+  constructor (props) {
+    super(props)
+    this.state = {data: []}
+  }
+
+  componentWillMount () {
+    this.setState({
       data: [
         {
-          name: 'Alice',
-          amount: 14.40
+          date: new Date(new Date() - 1000000),
+          amount: 0.99
         },
         {
-          name: 'Bob',
-          amount: 5.00
+          date: new Date(new Date() - 900000),
+          amount: 0.80
         },
         {
-          name: 'Charlie',
-          amount: 8.00
+          date: new Date(new Date() - 800000),
+          amount: 0.32
         },
         {
-          name: 'David',
-          amount: 5.34
+          date: new Date(new Date() - 700000),
+          amount: 0.40
+        },
+        {
+          date: new Date(new Date() - 600000),
+          amount: 0.50
+        },
+        {
+          date: new Date(new Date() - 500000),
+          amount: 0.65
         }
-      ],
-      options: {
-        width: 400,
-        height: 400,
-        center: [200, 200],
-        color: '#2980B9',
-        r: 1,
-        R: 125,
-        label: {
-          fontFamily: 'Arial',
-          fontSize: 13,
-          fontWeight: true,
-          color: '#ECF0F1'
-        }
-      }
+      ]
+    })
+  }
+
+  render () {
+    const now = new Date()
+
+    const chartProps = {
+      type: 'line',
+      data: [this.state.data.filter((data) => now - data.date < 2592000000).map((data) => {
+        return [data.date / 86400000, data.amount]
+      })],
+      yAxisUseDecimal: true,
+      style: styles.chart
     }
 
     return (
-      <ScrollView style={{flex: 1, backgroundColor: '#FFFCFF'}}
-        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}>
-        <Pie {...chartProps} />
-      </ScrollView>
+      <View style={styles.container}>
+        {this.state.data[0] &&
+          <Text>{now.getMilliseconds() - this.state.data[0].date.getMilliseconds()}</Text>
+        }
+      </View>
     )
   }
 }
@@ -54,8 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(255, 0, 0)'
+    alignItems: 'center'
   },
   chart: {
     backgroundColor: 'rgb(255, 0, 0)',
