@@ -11,7 +11,6 @@ import mongoose from 'mongoose'
 // http.listen(3000, () => {
 //   console.log('listening on *:3000')
 // })
-
 // io.on('connection', (socket) => {
 //   console.log('a user connected')
 //   // This event will trigger when any user is connected.
