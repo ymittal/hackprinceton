@@ -49,7 +49,8 @@ const groupSchema = new Schema({
     required: true
   },
   mission: String,
-  total: Number
+  total: Number,
+  description: String
 })
 
 mongoose.model('Group', groupSchema)

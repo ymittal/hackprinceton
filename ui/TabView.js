@@ -4,7 +4,7 @@ import Groups from './Groups'
 import Profile from './Profile'
 import Suggested from './Suggested'
 
-const labels = ['Suggested', 'Groups', 'Profile']
+const labels = ['Suggested', 'Groups', 'You']
 
 export default class TabView extends React.Component {
   render () {

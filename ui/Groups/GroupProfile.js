@@ -2,6 +2,7 @@ import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 import {Pie} from 'react-native-pathjs-charts'
 import LinearGradient from 'react-native-linear-gradient'
+import defaultStyles from '../styles'
 import {orange, gradientBottom, gradientTop} from '../colors'
 import {baseUrl} from '../../constants'
 
@@ -75,7 +76,7 @@ export default class GroupProfile extends React.Component {
         <Text style={styles.mission}>{this.props.mission}</Text>
         <Pie {...chartProps} />
         <Text style={styles.progress}>${current.toFixed(2)}/${this.props.goal}</Text>
-        <View style={styles.userlist}>{users}</View>
+        <Text style={[defaultStyles.text, styles.description]}>{this.props.description}</Text>
       </LinearGradient>
     )
   }
@@ -83,6 +84,7 @@ export default class GroupProfile extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 60,
     flex: 1,
     backgroundColor: 'rgb(255, 255, 255)',
     flexDirection: 'column',
@@ -103,8 +105,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'white'
   },
-  userlist: {
-
+  description: {
+    padding: 20,
+    fontSize: 15
   },
   text: {
     backgroundColor: 'transparent',

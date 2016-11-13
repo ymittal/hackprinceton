@@ -30,9 +30,8 @@ export default class Profile extends React.Component {
       <LinearGradient colors={[gradientTop(), gradientBottom()]} style={styles.container}>
         <View style={styles.view}>
           <Text style={[defaultStyles.text, styles.text]}>You've donated</Text>
-          <Text style={[defaultStyles.highlightedText, styles.text]}>${this.state.user.total.toFixed(2)}</Text>
+          <Text style={[defaultStyles.highlightedText, styles.total]}>${this.state.user.total.toFixed(2)}</Text>
           <Text style={[defaultStyles.text, styles.text]}>that's enough to feed a small family for two days!</Text>
-          <Text style={[defaultStyles.text, styles.text]}>Recent Updates</Text>
         </View>
       </LinearGradient>
     )
@@ -51,13 +50,16 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   text: {
     fontWeight: 'bold',
     fontSize: 20,
     textAlign: 'center'
+  },
+  total: {
+    fontSize: 30
   }
 })
 
