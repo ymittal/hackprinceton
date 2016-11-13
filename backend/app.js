@@ -4,7 +4,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 
-const port = process.env.PORT || 8080
+const port = 8081
+
+console.log('This works');
 
 var app = express()
 app.use(bodyParser.urlencoded({extended: false}))
