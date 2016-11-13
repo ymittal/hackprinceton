@@ -1,4 +1,10 @@
-# hackprinceton
-Hack for HackPrinceton
+# givmo
+Hack for HackPrinceton 2016
 
-Working Commit Number: 62b3af48419b2740cecbe97899c11ea9be7cdb29
+# Teammates
+
+Business Analytics - John Benenati - Columbia University, Financial Engineering '18
+Front-end Engineer - Kevin Zhang - New York University, Computer Science '17
+Backend Engineer/Product - Piyushi Bishnoi - Columbia University, Computer Science '17
+Design - Yash Mittal - Bucknell University, Computer Science & Engineering '19
+
