@@ -1,61 +1,42 @@
 import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
+import defaultStyles from './styles'
+import {gradientBottom, gradientTop} from './colors'
+import {baseUrl} from '../constants'
 
 export default class Profile extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {data: []}
+    this.state = {user: false}
   }
 
   componentWillMount () {
-    this.setState({
-      data: [
-        {
-          date: new Date(new Date() - 1000000),
-          amount: 0.99
-        },
-        {
-          date: new Date(new Date() - 900000),
-          amount: 0.80
-        },
-        {
-          date: new Date(new Date() - 800000),
-          amount: 0.32
-        },
-        {
-          date: new Date(new Date() - 700000),
-          amount: 0.40
-        },
-        {
-          date: new Date(new Date() - 600000),
-          amount: 0.50
-        },
-        {
-          date: new Date(new Date() - 500000),
-          amount: 0.65
-        }
-      ]
-    })
+    console.log('fetch')
+    fetch(`${baseUrl}/users?username=${this.props.username}`).then((res) => res.json())
+      .then((res) => {
+        console.log('done', res)
+        this.setState({user: res})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render () {
-    const now = new Date()
-
-    const chartProps = {
-      type: 'line',
-      data: [this.state.data.filter((data) => now - data.date < 2592000000).map((data) => {
-        return [data.date / 86400000, data.amount]
-      })],
-      yAxisUseDecimal: true,
-      style: styles.chart
+    if (!this.state.user) {
+      return <View />
     }
 
     return (
-      <View style={styles.container}>
-        {this.state.data[0] &&
-          <Text>{now.getMilliseconds() - this.state.data[0].date.getMilliseconds()}</Text>
-        }
-      </View>
+      <LinearGradient colors={[gradientTop(), gradientBottom()]} style={styles.container}>
+        <View style={styles.view}>
+          <Text style={[defaultStyles.text, styles.text]}>You've donated</Text>
+          <Text style={[defaultStyles.highlightedText, styles.text]}>${this.state.user.total.toFixed(2)}</Text>
+          <Text style={[defaultStyles.text, styles.text]}>that's enough to feed a small family for two days!</Text>
+          <Text style={[defaultStyles.text, styles.text]}>Recent Updates</Text>
+        </View>
+      </LinearGradient>
     )
   }
 }
@@ -67,10 +48,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  chart: {
-    backgroundColor: 'rgb(255, 0, 0)',
-    height: 200,
-    width: 200
+  view: {
+    marginTop: 40,
+    padding: 20,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    textAlign: 'center'
   }
 })
 

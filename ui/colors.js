@@ -6,6 +6,10 @@ export function blue (alpha = 1) {
   return `rgba(110, 149, 172, ${alpha})`
 }
 
+export function lightBlue (alpha = 1) {
+  return `rgba(110, 225, 255, ${alpha})`
+}
+
 export function orange (alpha = 1) {
   return `rgba(255, 175, 60, ${alpha})`
 }

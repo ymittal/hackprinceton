@@ -1,12 +1,13 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity} from 'react-native'
-import {blue, black} from '../colors'
+import defaultStyles from '../styles'
+import {orange, blue, black, gradientTop} from '../colors'
 
 export default class Tab extends React.Component {
   render () {
     const textStyle = StyleSheet.flatten([
-      styles.text,
-      {color: this.props.selected ? blue() : black()}
+      defaultStyles.text,
+      {color: this.props.selected ? orange() : black()}
     ])
 
     return (
@@ -21,13 +22,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // cursor: 'pointer',
-    borderWidth: 1,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
     borderStyle: 'solid',
-    borderColor: 'black',
+    borderColor: blue(),
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  text: {
-
+    alignItems: 'center',
+    backgroundColor: gradientTop()
   }
 })

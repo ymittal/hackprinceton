@@ -19,10 +19,19 @@ app.get('/users', async (req, res, next) => {
   try {
     if (req.query.username) {
       const user = await User.findOne({username: req.query.username}).populate('groups')
+
       const donations = await Donation.find({userAssociated: user._id})
       user.total = donations.reduce((prev, cur) => {
         return prev + cur.amount
       }, 0)
+
+      for (let i = 0; i < user.groups.length; i++) {
+        const group = user.groups[i]
+        const donations = await Donation.find({groupAssociated: group._id})
+        group.total = donations.reduce((prev, cur) => {
+          return prev + cur.amount
+        }, 0)
+      }
 
       res.send(user)
     } else {
@@ -59,7 +68,17 @@ app.get('/groups', async (req, res, next) => {
 
       res.send(arr)
     } else {
-      res.send(await User.find({}))
+      const groups = await Group.find({})
+
+      for (let i = 0; i < groups.length; i++) {
+        const group = groups[i]
+        const donations = await Donation.find({groupAssociated: group._id})
+        group.total = donations.reduce((prev, cur) => {
+          return prev + cur.amount
+        }, 0)
+      }
+
+      res.send(groups)
     }
   } catch (e) {
     next(e)

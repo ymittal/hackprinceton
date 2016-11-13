@@ -3,7 +3,7 @@ import {StyleSheet, Navigator, Text, TouchableHighlight} from 'react-native'
 import TabView from './TabView'
 import GroupProfile from './Groups/GroupProfile'
 import defaultStyles from './styles'
-import {blue} from './colors'
+import {blue, gradientTop} from './colors'
 
 export default class Main extends React.Component {
   renderScene (route, navigator) {
@@ -36,14 +36,18 @@ export default class Main extends React.Component {
               LeftButton: (route, navigator, index, navState) => {
                 return route.index === 0 ? null
                   : (
-                  <TouchableHighlight onPress={navigator.pop}>
+                  <TouchableHighlight underlayColor={gradientTop()} onPress={navigator.pop}>
                     <Text style={[defaultStyles.text, styles.text]}>Back</Text>
                   </TouchableHighlight>
                 )
               },
               RightButton: (route, navigator, index, navState) => null,
               Title: (route, navigator, index, navState) => {
-                return route.index === 0 ? null : <Text style={[defaultStyles.text, styles.text, styles.title]}>{route.group.theme}</Text>
+                return (
+                  <Text style={[defaultStyles.text, styles.text, styles.title]}>
+                    {route.index === 0 ? 'Kevin' : route.group.theme}
+                  </Text>
+                )
               }
             }}
             style={styles.navBar}
