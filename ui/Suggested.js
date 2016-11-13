@@ -1,6 +1,7 @@
 import React from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 import GroupList from './components/GroupList'
+import {baseUrl} from '../constants'
 
 export default class Suggested extends React.Component {
   constructor (props) {
@@ -40,7 +41,7 @@ export default class Suggested extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Suggested Groups</Text>
-        <GroupList showGroup={this.props.showGroup} url={`/groups?username=${this.props.username}&suggested=true`} />
+        <GroupList showGroup={this.props.showGroup} url={`${baseUrl}/groups`} />
       </View>
     )
   }

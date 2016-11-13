@@ -1,7 +1,6 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 import Group from './Group'
-import superagent from 'superagent'
 
 export default class GroupList extends React.Component {
   constructor (props) {
@@ -9,54 +8,24 @@ export default class GroupList extends React.Component {
     this.state = {groups: []}
   }
 
-  async componentWillMount () {
-    try {
-      this.setState({groups: await superagent.get(this.props.url)})
-    } catch (e) {
-      this.setState({
-        groups: [
-          {
-            name: e.toString()
-          }
-        ]
+  componentWillMount () {
+    console.log(this.props.url)
+    fetch(this.props.url).then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        this.setState({groups: res.groups})
       })
-    }
-    // this.setState({
-    //   groups: [
-    //     {
-    //       name: 'Group 1',
-    //       timeLeft: 5,
-    //       mission: 'Clean Water',
-    //       goal: 10
-    //     },
-    //     {
-    //       name: 'Suh Dudes',
-    //       timeLeft: 10,
-    //       mission: 'Poverty',
-    //       goal: 20
-    //     },
-    //     {
-    //       name: 'Hey Man',
-    //       timeLeft: 4,
-    //       mission: 'Healthcare',
-    //       goal: 10
-    //     },
-    //     {
-    //       name: 'Dats Cool',
-    //       timeLeft: 183,
-    //       mission: 'Breast Cancer',
-    //       goal: 300
-    //     }
-    //   ]
-    // })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   render () {
     const groups = this.state.groups.map((group, i) => {
-      const {name, timeLeft, mission, goal} = group
+      const {theme, timeLeft, mission, goal} = group
       const groupProps = {
         showGroup: this.props.showGroup.bind(null, group),
-        name,
+        theme,
         timeLeft,
         mission,
         goal,

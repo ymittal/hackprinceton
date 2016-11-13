@@ -29,7 +29,8 @@ const userSchema = new Schema({
   groups: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Group'
-  }]
+  }],
+  total: Number
 })
 
 // compiled schema into a model
@@ -37,7 +38,7 @@ mongoose.model('User', userSchema)
 
 // group schema
 const groupSchema = new Schema({
-  users: [{type: Schema.Types.ObjectId, ref: 'userSchema'}],
+  users: [{type: Schema.Types.ObjectId, ref: 'User'}],
   timeLeft: Number,
   goal: {
     type: Number,
@@ -58,12 +59,12 @@ const donationSchema = new Schema({
     type: Number,
     required: true
   },
-  groupAssociated: [{
-    type: Schema.Types.ObjectId, ref: 'group'
-  }],
-  userAssociated: [{
-    type: Schema.Types.ObjectId, ref: 'user'
-  }]
+  groupAssociated: {
+    type: Schema.Types.ObjectId, ref: 'Group'
+  },
+  userAssociated: {
+    type: Schema.Types.ObjectId, ref: 'User'
+  }
 })
 
 mongoose.model('Donation', donationSchema)

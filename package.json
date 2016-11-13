@@ -12,12 +12,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mongoose": "^4.6.7",
     "react": "15.3.2",
     "react-native": "0.37.0",
+    "react-native-linear-gradient": "^1.5.15",
     "react-native-pathjs-charts": "0.0.21",
     "react-native-progress": "^3.1.0",
     "superagent": "^2.3.0"
@@ -38,16 +40,5 @@
   },
   "standard": {
     "parser": "babel-eslint"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react",
-      "react-native",
-      "stage-0"
-    ],
-    "ignore": [
-      "/node_modules/"
-    ]
   }
 }
