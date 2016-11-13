@@ -17,14 +17,11 @@ const User = mongoose.model('User')
 const Group = mongoose.model('Group')
 const Donation = mongoose.model('Donation')
 
-// app.get('/groups', (req, res) => {})
-
 app.get('/users', async (req, res, next) => {
   const query = {
     username: req.query.username || undefined
   }
 
-  console.log('get users', query)
   try {
     res.send(await User.find(query))
   } catch (e) {
@@ -32,18 +29,19 @@ app.get('/users', async (req, res, next) => {
   }
 })
 
-app.post('/donations', (req, res) => {
+app.post('/donations', async (req, res, next) => {
   var donation = new Donation({
     amount: req.body.amount,
     user: req.body.userName,
     group: req.body.theme
   })
 
-  donation.save((err) => {
-    if (err) throw err
-
-    console.log('Donation created!')
-  })
+  try {
+    await donation.save()
+    console.log('donation saved')
+  } catch (e) {
+    next(e)
+  }
 })
 
 app.use((err, req, res, next) => {

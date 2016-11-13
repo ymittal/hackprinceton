@@ -1,7 +1,6 @@
 import './db'
 
 import mongoose from 'mongoose'
-// hopefully we're fucking connected at this point
 
 // var collection = db.collection('payments')
 
