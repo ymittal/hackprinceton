@@ -1,20 +1,30 @@
 import React from 'react'
 import {StyleSheet, TouchableHighlight, View, Text} from 'react-native'
+import defaultStyles from '../styles'
+import {gradientTop} from '../colors'
 
 export default class Group extends React.Component {
   render () {
+    const {timeLeft, theme, mission, total, goal} = this.props.group
+    console.log(total, goal)
     return (
-      <TouchableHighlight style={styles.container} onPress={this.props.showGroup}>
-        <View>
-          <Text style={styles.time}>
-            {this.props.timeLeft}
-          </Text>
-          <Text style={styles.name}>
-            {this.props.name}
-          </Text>
-          <Text style={styles.mission}>
-            {this.props.mission}
-          </Text>
+      <TouchableHighlight underlayColor={gradientTop()} style={styles.touchable} onPress={this.props.showGroup}>
+        <View style={styles.container}>
+          <View style={styles.info}>
+            <Text style={styles.time}>
+              {timeLeft}
+            </Text>
+            <Text style={styles.theme}>
+              {theme}
+            </Text>
+            <Text style={styles.mission}>
+              {mission}
+            </Text>
+          </View>
+          <View style={styles.progress}>
+            <Text style={[defaultStyles.highlightedText, styles.total]}>${total.toFixed(2)}</Text>
+            <Text style={[styles.goal]}>&nbsp;/ ${goal}</Text>
+          </View>
         </View>
       </TouchableHighlight>
     )
@@ -22,21 +32,30 @@ export default class Group extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  touchable: {
     height: 72,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'black',
+    // borderWidth: 1,
+    // borderStyle: 'solid',
+    // borderColor: 'black',
     justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 4,
     padding: 4,
-    borderRadius: 2
+    borderRadius: 2,
+    backgroundColor: 'white'
+  },
+  container: {
+    height: 72,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   time: {
-    marginTop: -12,
+    marginTop: -5,
     fontSize: 8
   },
-  name: {
+  theme: {
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 12
@@ -44,5 +63,22 @@ const styles = StyleSheet.create({
   mission: {
     fontSize: 12,
     marginLeft: 16
+  },
+  info: {
+    height: 50,
+    flex: 2
+  },
+  progress: {
+    height: 72,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  total: {
+    fontWeight: 'bold'
+  },
+  goal: {
+
   }
 })

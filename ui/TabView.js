@@ -10,9 +10,9 @@ export default class TabView extends React.Component {
   render () {
     return (
       <TabBarView labels={labels}>
-        <Suggested />
-        <Groups showGroup={this.props.showGroup} />
-        <Profile />
+        <Suggested showGroup={this.props.showGroup} />
+        <Groups showGroup={this.props.showGroup} username='user1' />
+        <Profile username='user1' />
       </TabBarView>
     )
   }
