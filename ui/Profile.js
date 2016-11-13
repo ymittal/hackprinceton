@@ -12,10 +12,8 @@ export default class Profile extends React.Component {
   }
 
   componentWillMount () {
-    console.log('fetch')
     fetch(`${baseUrl}/users?username=${this.props.username}`).then((res) => res.json())
       .then((res) => {
-        console.log('done', res)
         this.setState({user: res})
       })
       .catch((err) => {

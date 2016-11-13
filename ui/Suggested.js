@@ -15,7 +15,6 @@ export default class Suggested extends React.Component {
   componentWillMount () {
     fetch(`${baseUrl}/groups`).then((res) => res.json())
       .then((res) => {
-        console.log(res)
         this.setState({groups: res})
       })
       .catch((err) => {

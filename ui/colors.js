@@ -21,7 +21,3 @@ export function gradientBottom (alpha = 1) {
 export function gradientTop (alpha = 1) {
   return `rgba(140, 212, 249, ${alpha})`
 }
-
-export function orange(alpha = 1) {
-  return `rgba(255, 153, 0, ${alpha})`
-}

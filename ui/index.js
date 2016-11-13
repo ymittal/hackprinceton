@@ -1,11 +1,37 @@
 import React from 'react'
 import {StyleSheet, Navigator, Text, TouchableHighlight} from 'react-native'
+// import SocketIO from 'react-native-socketio'
+// import Notification from './components/Notification'
 import TabView from './TabView'
 import GroupProfile from './Groups/GroupProfile'
 import defaultStyles from './styles'
 import {blue, gradientTop} from './colors'
 
 export default class Main extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {open: false}
+    // this.socket = new SocketIO('http://localhost:3000')
+    // this.socket.on('payment', (amount) => {
+    //   this.setState({open: true, amount})
+    // })
+  }
+
+  // sendDonation (theme, amount) {
+  //   fetch('/donations', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       username: 'user1',
+  //       theme
+  //     })
+  //   })
+  //   this.closeNotif()
+  // }
+
+  // closeNotif () {
+  //   this.setState({open: false})
+  // }
+
   renderScene (route, navigator) {
     if (route.index === 0) {
       return <TabView showGroup={this.showGroup.bind(this, navigator)} />

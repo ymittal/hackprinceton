@@ -3,25 +3,24 @@ import './db'
 import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
-import http from 'http'
-import socket from 'socket.io'
+// import http from 'http'
+// import socket from 'socket.io'
 
-const io = socket(http.Server(express()))
+// const io = socket(http.Server(express()))
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
+// http.listen(3000, () => {
+//   console.log('listening on *:3000')
+// })
 
-io.on('connection',function(socket){
-	console.log('We have user connected !');
-// This event will trigger when any user is connected.
-// You can use 'socket' to emit and receive events.
-	socket.on('payment added',function(data){
-
-		io.emit('payment request made');
-// When any connected client emit this event, we will receive it here.
-	});
-});
+// io.on('connection', (socket) => {
+//   console.log('a user connected')
+//   // This event will trigger when any user is connected.
+//   // You can use 'socket' to emit and receive events.
+//   socket.on('send payment', (amount) => {
+//     io.emit('payment', amount)
+//   // When any connected client emit this event, we will receive it here.
+//   })
+// })
 
 var app = express()
 app.use(bodyParser.urlencoded({extended: false}))
